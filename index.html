@@ -8,8 +8,639 @@
   <title>Wallet Lab</title>
   <link rel=icon href="https://cdn.glitch.global/5d6ec535-2cd8-4f86-a00f-e361a35f3ece/logo%20mpw.png?v=1689028531204" />
   <link rel=stylesheet href=https://use.fontawesome.com/releases/v5.3.1/css/all.css integrity=sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU crossorigin=anonymous />
-  <link href=style.css rel=stylesheet />
   <link rel="shortcut icon" href=images/ico/favicon.ico />
+
+  <style>
+
+
+header {
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:5
+}
+#header {
+    box-sizing:border-box;
+    height:15%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#000
+}
+.estrutura.expanded {
+    display:block;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#003;
+    z-index:4;
+    text-align:center;
+    padding-top:50px;
+    transition:all .3s ease
+}
+.estrutura.expanded a {
+    display:block;
+    margin-bottom:20px;
+    font-size:24px;
+    color:#fff;
+    text-decoration:none
+}
+#menu {
+    display:none
+}
+.background-overlay {
+    position:relative;
+    display:inline-block;
+    align-items:center;
+    justify-content:center;
+    text-align:center
+}
+.background-overlay:before {
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,.5);
+    z-index:-1
+}
+body,p,h1,ul,li,blockquote {
+    margin:0;
+    padding:0
+}
+body {
+    font-family:"Volkorn",Georgia,Serif
+}
+.estrutura {
+    display:grid;
+    grid-template-columns:1fr 1fr 2fr;
+    grid-template-areas:"header header header header" "home home home home" "services services services services" "leagues leagues leagues leagues" "nft nft nft nft" "pricing pricing pricing pricing" "contact contact contact contact" "footer footer footer footer"
+}
+#logo {
+    padding:0 1rem;
+    color:#ffb600;
+    text-decoration:none;
+    font-size:1.5em
+}
+#menu {
+    display:flex;
+    list-style:none;
+    gap:.5rem
+}
+#header ul li a {
+    position:relative;
+    display:block;
+    text-align:center;
+    margin:0 25px;
+    color:#fff;
+    font-size:13px;
+    text-decoration:none;
+    text-transform:uppercase;
+    transition:.5s;
+    padding:5px 10px
+}
+#btn-mobile {
+    display:none
+}
+@media (max-width:800px) {
+    #menu {
+        display:block;
+        position:absolute;
+        width:100%;
+        top:100%;
+        right:0;
+        background:#000;
+        transition:.6s;
+        z-index:1000;
+        height:0;
+        visibility:hidden;
+        overflow-y:hidden
+    }
+    #nav.active #menu {
+        margin:0;
+        padding:0;
+        height:calc(100vh - 70px);
+        visibility:visible;
+        overflow-y:auto
+    }
+    #menu a {
+        padding:1rem 0;
+        margin:0 1rem;
+        border-bottom:2px solid rgba(0,0,0,.05)
+    }
+    #btn-mobile {
+        display:flex;
+        padding:.5rem 1rem;
+        font-size:1rem;
+        border:none;
+        background:0 0;
+        cursor:pointer;
+        color:silver;
+        gap:.5rem
+    }
+    #hamburger {
+        border-top:2px solid;
+        width:20px
+    }
+    #hamburger:after,#hamburger:before {
+        content:"";
+        display:block;
+        width:20px;
+        height:2px;
+        background:silver;
+        margin-top:5px;
+        transition:.3s;
+        position:relative
+    }
+    #nav.active #hamburger {
+        border-top-color:transparent
+    }
+    #nav.active #hamburger:before {
+        transform:rotate(135deg);
+        color:#9400d3
+    }
+    #nav.active #hamburger:after {
+        transform:rotate(-135deg);
+        color:#9400d3;
+        top:-7px
+    }
+}
+#home {
+    grid-area:home;
+    height:800px;
+    background:url("https://cdn.glitch.global/5d6ec535-2cd8-4f86-a00f-e361a35f3ece/armam.jpg?v=1689030220072");
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    color:#fff
+}
+#home .titulo {
+    direction:grid;
+    align-content:center;
+    margin-top:20%;
+    margin-left:0
+}
+#home h1 {
+    color:#fff;
+    font-size:2rem
+}
+#home h1 span {
+    color:#ffb600
+}
+#home p {
+    font-size:1.2em
+}
+#home button {
+    background:0 0;
+    border:2px solid #fff;
+    color:#fff;
+    border-radius:5px;
+    padding:10px;
+    margin-top:10px;
+    text-transform:uppercase;
+    cursor:pointer
+}
+#home button:hover {
+    background:#ffb600;
+    border:none
+}
+#game {
+    display:grid;
+    grid-area:services;
+    max-width:1040px;
+    margin-right:auto;
+    margin-left:auto;
+    padding:50px
+}
+.title-game {
+    display:grid;
+    justify-content:center
+}
+.title-game h2 {
+    font-size:30px;
+    text-align:center;
+    align-self:center;
+    color:#ffb600;
+    display:inline-block
+}
+.title-game p {
+    text-align:center
+}
+#game .card-box {
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    margin-top:10px
+}
+#leagues {
+    display:grid;
+    background:url("https://cdn.glitch.global/5d6ec535-2cd8-4f86-a00f-e361a35f3ece/ijokpjk.jpg?v=1689038604279");
+    background-size:cover;
+    background-repeat:no-repeat;
+    grid-area:leagues
+}
+#leagues .leagues-box {
+    display:grid;
+    grid-template-columns:repeat(2,400px);
+    max-width:1040px;
+    margin-right:auto;
+    margin-left:auto;
+    margin-top:50px
+}
+#leagues h2 {
+    display:grid;
+    font-size:30px;
+    text-align:center;
+    align-self:center;
+    color:#ffb600
+}
+.leagues-box p {
+    color:#fff;
+    letter-spacing:2px;
+    text-align:justify
+}
+.leagues-box img {
+    width:100%;
+    max-width:400px
+}
+.leagues-box p {
+    color:#fff;
+    letter-spacing:2px;
+    text-align:justify
+}
+#nft {
+    display:grid;
+    grid-area:nft;
+    max-width:1040px;
+    margin-right:auto;
+    margin-left:auto;
+    padding:50px
+}
+#nft h2 {
+    display:grid;
+    font-size:30px;
+    text-align:center;
+    align-self:center;
+    color:#ffb600
+}
+#nft p {
+    text-align:center
+}
+.box-nft {
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    margin-top:50px
+}
+.media-nft {
+    margin:10px;
+    position:relative;
+    overflow:hidden
+}
+#nft img {
+    width:100%;
+    transition:all .5s
+}
+.caption1 {
+    position:absolute;
+    bottom:0;
+    left:0;
+    height:30%;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    transition:all .5s;
+    background-color:#000;
+    transition:all .5s;
+    background-color:rgba(0,0,0,.5);
+    transform:translateY(100%)
+}
+.caption1 h1 {
+    text-transform:uppercase;
+    margin:0
+}
+.caption1 p {
+    font-size:18px;
+    text-transform:capitalize
+}
+.media-nft:hover .caption1 {
+    transform:translateY(0)
+}
+.social-icons {
+    display:flex
+}
+.social-icons li {
+    list-style:none
+}
+.social-icons a {
+    margin:6px;
+    color:#fff;
+    border:1px solid #fff;
+    border-radius:5px;
+    padding:6px
+}
+#pricing {
+    display:grid;
+    background:url("...");
+    background-size:cover;
+    background-repeat:no-repeat;
+    grid-area:pricing;
+    padding:50px
+}
+#pricing h2 {
+    display:grid;
+    font-size:30px;
+    text-align:center;
+    align-self:center;
+    color:#ffb600
+}
+#pricing p {
+    color:#fff;
+    text-align:center
+}
+.box-pricing {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    max-width:1040px;
+    max-width:1040px;
+    margin-right:auto;
+    margin-left:auto
+}
+.media-pricing {
+    border:1px solid #fff;
+    background-color:#171b1e;
+    padding:10px;
+    margin:10px
+}
+.plan-header {
+    background-color:#ffb600;
+    border-radius:20px;
+    padding:10px
+}
+.plan-header span {
+    display:grid;
+    justify-content:center;
+    padding:10px
+}
+.plan-header .plan-name {
+    display:grid;
+    justify-content:center;
+    padding:10px
+}
+.pricing li {
+    display:grid;
+    color:#fff;
+    text-align:center;
+    padding:10px
+}
+.media-pricing a {
+    text-decoration:none
+}
+.media-pricing button {
+    background:#ffb600;
+    color:#fff;
+    border-radius:5px;
+    width:100%;
+    padding:5px;
+    cursor:pointer
+}
+#contact {
+    display:grid;
+    grid-area:contact;
+    padding:50px;
+    max-width:1040px;
+    margin-right:auto;
+    margin-left:auto
+}
+#contact h2 {
+    display:grid;
+    font-size:30px;
+    text-align:center;
+    align-self:center;
+    color:#ffb600
+}
+#contact p {
+    color:#000;
+    text-align:center
+}
+.box-contact {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    background-color:#494d50;
+    max-width:600px;
+    padding:50px;
+    margin-top:50px
+}
+.contact-info h3 {
+    color:#ffb600;
+    text-align:center
+}
+.contact-info address {
+    color:#fff;
+    text-align:center
+}
+.contact-form {
+    display:grid
+}
+.contact-form #placeholder::placeholder {
+    color:#000
+}
+.contact-form input {
+    padding:5px 10px;
+    margin:3px;
+    width:100%;
+    border-radius:5px
+}
+.contact-form .message {
+    padding:50px 10px;
+    margin:3px
+}
+.contact-form button {
+    display:grid;
+    background:#ffb600;
+    color:#000;
+    border-radius:5px;
+    padding:5px;
+    text-transform:uppercase;
+    margin-top:10px;
+    cursor:pointer
+}
+#footer {
+    grid-area:footer;
+    background-color:#000;
+    display:grid
+}
+#footer a {
+    text-decoration:none
+}
+.box-footer {
+    padding:30px;
+    display:grid;
+    grid-template-columns:1fr auto
+}
+.info-copy {
+    color:#fff
+}
+.footer-icons {
+    display:flex;
+    justify-content:end;
+    list-style:none
+}
+.footer-icons a {
+    margin:6px;
+    color:#fff
+}
+@media (max-width:800px) {
+    #home .titulo {
+        margin-bottom:40px
+    }
+    #services .card-box {
+        grid-template-columns:1fr 1fr;
+        margin-top:50px
+    }
+    #leagues .leagues-box {
+        grid-template-columns:1fr
+    }
+    .leagues-box img {
+        margin-right:auto;
+        margin-left:auto
+    }
+    .leagues-box p {
+        padding:20px
+    }
+    #nft .box-nft {
+        grid-template-columns:1fr 1fr
+    }
+}
+@media (max-width:600px) {
+    #home .titulo {
+        margin-top:200px
+    }
+    #services .card-box {
+        grid-template-columns:1fr;
+        margin-top:50px
+    }
+    #leagues .leagues-box {
+        grid-template-columns:1fr
+    }
+    .leagues-box img {
+        margin-right:auto;
+        margin-left:auto
+    }
+    .leagues-box p {
+        padding:20px
+    }
+    #pricing .box-pricing {
+        grid-template-columns:1fr
+    }
+    #nft .box-nft {
+        grid-template-columns:1fr 1fr
+    }
+    #contact .box-contact {
+        grid-template-columns:1fr
+    }
+    #contact .contact-info {
+        margin-bottom:30px
+    }
+}
+@media (max-width:500px) {
+    #services .card-box {
+        grid-template-columns:1fr;
+        margin-top:50px
+    }
+    #leagues .leagues-box {
+        grid-template-columns:1fr
+    }
+    .leagues-box img {
+        margin-right:auto;
+        margin-left:auto
+    }
+    .leagues-box p {
+        padding:20px
+    }
+    #pricing .box-pricing {
+        grid-template-columns:1fr
+    }
+    #nft .box-nft {
+        grid-template-columns:1fr
+    }
+    #contact .box-contact {
+        grid-template-columns:1fr
+    }
+}
+#logo img {
+    width:50px;
+    height:auto
+}
+.titulo {
+    position:relative
+}
+#services .card-container {
+    display:flex;
+    flex-wrap:wrap
+}
+.card img {
+    width:100%;
+    border-radius:5px
+}
+.card h3 {
+    margin-top:10px
+}
+.card p {
+    margin-top:5px
+}
+.card-container {
+    display:flex;
+    justify-content:center
+}
+.card {
+    width:50%;
+    height:auto;
+    padding:20px;
+    background-color:#fff;
+    box-shadow:0 2px 4px rgba(0,0,0,.2);
+    border-radius:5px;
+    margin:10px
+}
+.card img {
+    width:100%;
+    height:auto;
+    border-radius:5px
+}
+.button {
+    display:inline-block;
+    width:50%;
+    padding:10px 20px;
+    background-color:#003;
+    color:#fff;
+    text-decoration:none;
+    border-radius:5px
+}
+.highlight-text {
+    color:#fff
+}
+.custom-button {
+    display:inline-block;
+    padding:10px 20px;
+    background-color:#4caf50;
+    color:#fff;
+    border:none;
+    border-radius:4px;
+    font-size:16px;
+    cursor:pointer
+}
+.custom-button:hover {
+    background-color:#45a049
+}
+
+
+
+    
+  </style>
 
   <head>
     <link rel=stylesheet href=https://ipfs.io/ipfs/QmUC7qhSHsZA2VXgvBxFRraj9zWo4XhgXDyDe31oJS6Lu9?filename=minif.css />
