@@ -30,6 +30,10 @@
     <link rel="shortcut icon" href="images/ico/favicon.ico" />
     <head>
       <link rel="stylesheet" href="style.css" />
+      <style>
+window.addEventListener("scroll",(function(){document.querySelector("header").classList.toggle("sticky",window.scrollY>0)}));const t=document.getElementById("btn-mobile");function e(t){"touchstart"===t.type&&t.preventDefault();const e=document.getElementById("nav");e.classList.toggle("active");const n=e.classList.contains("active");t.currentTarget.setAttribute("aria-expanded",n),n?t.currentTarget.setAttribute("aria-label","Fechar Menu"):t.currentTarget.setAttribute("aria-label","Abrir Menu")}t.addEventListener("click",e),t.addEventListener("touchstart",e);
+        
+      </style>
     </head>
   </head>
 
